@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.duhalonso.details_users_github">
    <application
-        android:label="details_users_github"
+        android:label="Detalhes Repositório"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
