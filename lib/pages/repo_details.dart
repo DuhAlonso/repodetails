@@ -184,7 +184,7 @@ Widget topicsList(List topics, String language) {
         topics.length,
         (int idx) {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
             child: Chip(
               labelPadding: const EdgeInsets.all(2.0),
               label: Text(

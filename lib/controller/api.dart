@@ -44,6 +44,8 @@ class Api {
       //   userUrl: userResponse['avatar_url'],
       // );
       return userResponse;
+    } else {
+      return null;
     }
   }
 }

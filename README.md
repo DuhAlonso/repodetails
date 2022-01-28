@@ -1,4 +1,4 @@
-<img src="https://img.shields.io/badge/Version-1.0.0-green"> <img src="https://img.shields.io/badge/license-MIT-blue"> 
+<img src="https://img.shields.io/badge/Version-1.0.1-green"> <img src="https://img.shields.io/badge/license-MIT-blue"> 
 
 # Detalhes do repositório
 
@@ -8,7 +8,7 @@ Criei esse app para colocar em prática meu conhecimento sobre flutter.
 
 :iphone: Pesquisa usuáio do GitHub.  
 :iphone: Lista os repositórios do usuário.  
-:iphone: Exibe as principais informações do reposiório.  
+:iphone: Exibe as principais informações do repositório.  
 
 ## Screenshots
 
