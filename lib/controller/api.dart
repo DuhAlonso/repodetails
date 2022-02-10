@@ -38,11 +38,6 @@ class Api {
     );
     var userResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      // UserModel userData = UserModel(
-      //   userName: userResponse['login'],
-      //   userbio: userResponse['bio'],
-      //   userUrl: userResponse['avatar_url'],
-      // );
       return userResponse;
     } else {
       return null;

@@ -20,6 +20,7 @@ Vale lembrar que o Github permite apenas 60 requisições por hora baseado no IP
 
 ### No Futuro
 - [ ] Novas funcionalidades 
+- [ ] Clean architecture 
 
 </br>
 </br>
