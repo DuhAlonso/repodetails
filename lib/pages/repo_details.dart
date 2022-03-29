@@ -4,29 +4,15 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:details_users_github/models/repo_model.dart';
+
 // ignore: must_be_immutable
 class RepoDetails extends StatefulWidget {
-  String? nameRepo;
-  String? descriptionRepo;
-  String? createdAt;
-  String? updatedAt;
-  String? urlRepo;
-  int? forksCount;
-  int? starCount;
-  String? language;
-  List? topics;
+  RepoUser repoUser;
 
   RepoDetails({
     Key? key,
-    this.nameRepo,
-    this.descriptionRepo,
-    this.createdAt,
-    this.updatedAt,
-    this.urlRepo,
-    this.forksCount,
-    this.starCount,
-    this.language,
-    this.topics,
+    required this.repoUser,
   }) : super(key: key);
 
   @override
@@ -48,20 +34,23 @@ class _RepoDetailsState extends State<RepoDetails> {
 
   @override
   Widget build(BuildContext context) {
+    String language = widget.repoUser.language ?? 'github';
+    List topics = widget.repoUser.topics ?? ['GitHub'];
+
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.grey[850],
-        title: Text(widget.nameRepo!),
+        title: Text(widget.repoUser.nameRepo!),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Text(
-              widget.descriptionRepo!,
+              widget.repoUser.descriptionRepo ?? 'Repositorie the GitHub',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline6,
             ),
@@ -70,10 +59,11 @@ class _RepoDetailsState extends State<RepoDetails> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  repoCount(widget.starCount!, Icons.star, 'Star', context),
+                  repoCount(
+                      widget.repoUser.starCount!, Icons.star, 'Star', context),
                   const SizedBox(width: 20),
-                  repoCount(widget.forksCount!, Icons.get_app_outlined, 'Fork',
-                      context)
+                  repoCount(widget.repoUser.forksCount!, Icons.get_app_outlined,
+                      'Fork', context)
                 ],
               ),
             ),
@@ -87,7 +77,7 @@ class _RepoDetailsState extends State<RepoDetails> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.network(
-                    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${widget.language!.toLowerCase()}/${widget.language!.toLowerCase()}-original.svg',
+                    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${language.toLowerCase()}/${language.toLowerCase()}-original.svg',
                     height: 80,
                     placeholderBuilder: (BuildContext context) => Container(
                         padding: const EdgeInsets.all(30.0),
@@ -96,7 +86,7 @@ class _RepoDetailsState extends State<RepoDetails> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
-                      widget.language!,
+                      language,
                       style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
@@ -109,7 +99,7 @@ class _RepoDetailsState extends State<RepoDetails> {
                   title: const Text(
                     'Criação do Repositório',
                   ),
-                  trailing: formatDate(widget.createdAt!)),
+                  trailing: formatDate(widget.repoUser.createdAt!)),
             ),
             Card(
               elevation: 5,
@@ -117,7 +107,7 @@ class _RepoDetailsState extends State<RepoDetails> {
                   title: const Text(
                     'Última Atualização',
                   ),
-                  trailing: formatDate(widget.updatedAt!)),
+                  trailing: formatDate(widget.repoUser.updatedAt!)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
@@ -126,18 +116,18 @@ class _RepoDetailsState extends State<RepoDetails> {
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
-            topicsList(widget.topics!, widget.language!),
+            topicsList(topics, language),
             const Flexible(
               fit: FlexFit.tight,
               child: SizedBox(height: 10),
             ),
             GestureDetector(
               onTap: () {
-                launch(widget.urlRepo!);
+                launch(widget.repoUser.urlRepo!);
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(widget.urlRepo!),
+                child: Text(widget.repoUser.urlRepo!),
               ),
             )
           ],
