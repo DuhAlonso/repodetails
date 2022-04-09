@@ -21,6 +21,6 @@ void main() {
         bodyText2: TextStyle(fontSize: 14.0),
       ),
     ),
-    home: const HomePage(),
+    home: HomePage(),
   ));
 }

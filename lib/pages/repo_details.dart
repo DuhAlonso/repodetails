@@ -1,7 +1,9 @@
+import 'package:details_users_github/pages/home_controller.dart';
+import 'package:details_users_github/pages/widgets/repositorie_counts_widget.dart';
+import 'package:details_users_github/pages/widgets/topics_lists_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:details_users_github/models/repo_model.dart';
@@ -20,17 +22,7 @@ class RepoDetails extends StatefulWidget {
 }
 
 class _RepoDetailsState extends State<RepoDetails> {
-  formatDate(String date) {
-    initializeDateFormatting('pt_BR');
-    var formatter = DateFormat.yMMMd('pt_BR'); // formata no padrão Brasileiro
-    DateTime dateConverted = DateTime.parse(date);
-    String formattedDate = formatter.format(dateConverted);
-    return Text(
-      formattedDate,
-      textAlign: TextAlign.start,
-      style: const TextStyle(fontSize: 15),
-    );
-  }
+  final controller = HomeController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +51,17 @@ class _RepoDetailsState extends State<RepoDetails> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  repoCount(
-                      widget.repoUser.starCount!, Icons.star, 'Star', context),
+                  RepositorieCountsWidget(
+                      count: widget.repoUser.starCount!,
+                      icon: Icons.star,
+                      text: 'Star',
+                      context: context),
                   const SizedBox(width: 20),
-                  repoCount(widget.repoUser.forksCount!, Icons.get_app_outlined,
-                      'Fork', context)
+                  RepositorieCountsWidget(
+                      count: widget.repoUser.forksCount!,
+                      icon: Icons.get_app_outlined,
+                      text: 'Fork',
+                      context: context),
                 ],
               ),
             ),
@@ -99,7 +97,7 @@ class _RepoDetailsState extends State<RepoDetails> {
                   title: const Text(
                     'Criação do Repositório',
                   ),
-                  trailing: formatDate(widget.repoUser.createdAt!)),
+                  trailing: controller.formatDate(widget.repoUser.createdAt!)),
             ),
             Card(
               elevation: 5,
@@ -107,16 +105,16 @@ class _RepoDetailsState extends State<RepoDetails> {
                   title: const Text(
                     'Última Atualização',
                   ),
-                  trailing: formatDate(widget.repoUser.updatedAt!)),
+                  trailing: controller.formatDate(widget.repoUser.updatedAt!)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Text(
-                'Tópicos',
+                'Tópico(s)',
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
-            topicsList(topics, language),
+            TopicsListsWidget(topics: topics, language: language),
             const Flexible(
               fit: FlexFit.tight,
               child: SizedBox(height: 10),
@@ -135,63 +133,4 @@ class _RepoDetailsState extends State<RepoDetails> {
       ),
     );
   }
-}
-
-Widget repoCount(int count, IconData icon, String text, BuildContext context) {
-  return Container(
-    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-    decoration: BoxDecoration(
-        border: Border.all(width: 1.0, color: Colors.white),
-        borderRadius: BorderRadius.circular(10)),
-    child: Row(
-      children: [
-        Icon(icon),
-        const SizedBox(
-          width: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 5),
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.headline5,
-          ),
-        ),
-        Text(
-          count.toString(),
-          style: Theme.of(context).textTheme.headline6,
-        )
-      ],
-    ),
-  );
-}
-
-Widget topicsList(List topics, String language) {
-  topics.isEmpty ? topics.add(language) : topics;
-  return SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: Row(
-      children: List<Widget>.generate(
-        topics.length,
-        (int idx) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            child: Chip(
-              labelPadding: const EdgeInsets.all(2.0),
-              label: Text(
-                topics[idx],
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                ),
-              ),
-              backgroundColor: Colors.grey[750],
-              elevation: 6.0,
-              shadowColor: Colors.grey[60],
-              padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-            ),
-          );
-        },
-      ).toList(),
-    ),
-  );
 }

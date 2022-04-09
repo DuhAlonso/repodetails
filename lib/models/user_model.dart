@@ -10,6 +10,14 @@ class UserModel {
     this.userUrl,
   });
 
+  // factory UserModel.fromJson(Map<String, dynamic> json) {
+  //   return UserModel(
+  //     userName: json['login'],
+  //     userUrl: json['avatar_url'],
+  //     userbio: json['bio'],
+  //   );
+  // }
+
   Map<String, dynamic> toMap() {
     return {
       'userName': userName,

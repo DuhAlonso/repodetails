@@ -9,7 +9,7 @@ class UtilServices {
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 3,
         backgroundColor:
-            isError ? const Color(0xFFffffff) : const Color(0xFFff0000),
+            !isError ? const Color(0xFFffffff) : const Color(0xFFff0000),
         textColor: isError ? const Color(0xFFffffff) : const Color(0xFF000000));
   }
 }
