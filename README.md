@@ -1,4 +1,4 @@
-<img src="https://img.shields.io/badge/Version-1.0.1-green"> <img src="https://img.shields.io/badge/license-MIT-blue"> 
+<img src="https://img.shields.io/badge/Version-1.0.2-green"> <img src="https://img.shields.io/badge/license-MIT-blue"> 
 
 # Detalhes do repositório
 

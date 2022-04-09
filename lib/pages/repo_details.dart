@@ -105,7 +105,7 @@ class _RepoDetailsState extends State<RepoDetails> {
                   title: const Text(
                     'Última Atualização',
                   ),
-                  trailing: controller.formatDate(widget.repoUser.updatedAt!)),
+                  trailing: controller.formatDate(widget.repoUser.pushed_at!)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),

@@ -18,7 +18,7 @@ class RepoGithubRepositorie {
           nameRepo: rep['name'],
           descriptionRepo: rep['description'],
           createdAt: rep['created_at'],
-          updatedAt: rep['updated_at'],
+          pushed_at: rep['pushed_at'],
           urlRepo: rep['svn_url'],
           forksCount: rep['forks_count'],
           starCount: rep['stargazers_count'],
